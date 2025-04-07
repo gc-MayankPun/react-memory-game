@@ -1,0 +1,29 @@
+.option-highlighter-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.highlighter-container {
+    display: flex;
+    position: relative;
+}
+
+.highlighter-container span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: .5rem .8rem;
+}
+
+.highlighter {
+    background-color: var(--highlighter-color);
+    border-radius: 1rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    width: 5rem;
+}

@@ -1,0 +1,49 @@
+.card {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+
+    /* Below CSS restricts drag-and-drop ghosting */
+    /* prevents text/image selection */
+    user-select: none;
+    /* disables dragging on WebKit browsers */
+    -webkit-user-drag: none;
+}
+
+.card-front,
+.card-back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 1rem;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.card-front {
+    background-color: var(--card-front);
+    transform: rotateY(180deg);
+    font-size: 8rem;
+}
+
+.card-back {
+    background-color: var(--card-back);
+}
+
+
+/* For Mobiles */
+@media (max-width: 768px) {
+    html {
+        font-size: 45%;
+    }
+
+    .card {
+        height: 10rem !important;
+        width: 10rem !important;
+    }
+}

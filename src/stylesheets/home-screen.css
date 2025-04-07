@@ -1,0 +1,41 @@
+.home-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.home-screen section h1 {
+    font-size: 5rem;
+    line-height: 5rem;
+}
+
+.home-screen section p {
+    font-size: 1.8rem;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.game-title-img-container {
+    height: 8rem;
+    width: 8rem;
+}
+
+.game-title-img-container img {
+    height: 100%;
+    width: 100%;
+}
+
+.option-highlighter-gap{
+    margin-top: 2rem;
+}
+
+.high-score{
+    font-size: 1.8rem;
+}

@@ -1,0 +1,86 @@
+:root {
+  /* Background Colors */
+  --bg-color: #1E1E2E;
+  --card-back: #313244;
+  --card-front: #CBA6F7;;
+
+  /* Text Colors */
+  --text-color: #F8F8F2;
+  --title-color: #BD93F9;
+
+  /* Button Colors */
+  --btn-bg: #BD93F9;
+  --btn-text: #1E1E2E;
+  --btn-hover: #D6A8FF;
+
+  /* Border Colors */
+  --border-color: #6272A4;
+
+  /* Highlighter */
+  --highlighter-color: #446080;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+}
+
+/* Boiler Code */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1.6rem;
+}
+
+a {
+  color: rgb(37, 37, 167);
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 2rem;
+  transition: .5s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+.screen {
+  will-change: opacity;
+}
+
+/* For Tablets */
+@media (max-width: 998px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+/* For Mobiles */
+@media (max-width: 768px) {
+  html {
+    font-size: 45%;
+  }
+}

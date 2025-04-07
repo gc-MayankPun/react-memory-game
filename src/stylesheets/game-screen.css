@@ -1,0 +1,66 @@
+.game-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.game-screen-title {
+    border-bottom: .1rem solid var(--border-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-state {
+    display: flex;
+    gap: 2rem
+}
+
+.game-state span {
+    cursor: pointer;
+    font-size: 2.5rem;
+    transition: .5s ease;
+    display: inline-block;
+}
+
+.game-state span:hover {
+    transform: scale(1.2);
+}
+
+.game-timer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.card-container {
+    list-style: none;
+    margin: auto;
+    width: 80rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* For Mobiles */
+@media (max-width: 768px) {
+    html {
+        font-size: 45%;
+    }
+
+    .card-container {
+        width: 100%;
+    }
+}

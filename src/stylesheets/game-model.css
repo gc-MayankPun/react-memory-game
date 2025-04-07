@@ -1,0 +1,41 @@
+.game-model {
+    padding: 3rem;
+    height: 80vh;
+    width: 80%;
+    position: absolute;
+    background-color: black;
+    z-index: 100;
+    border-radius: 1rem;
+    display: flex;
+    gap: 4rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.close{
+    color: white;
+    position: absolute;
+    top: 3rem;
+    right: 4rem;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.game-model-title{
+    font-size: 4rem;
+}
+
+.game-model-btn-container{
+    display: flex;
+    gap: 2rem;
+}
+
+.game-model-btn-container button{
+    padding: .5rem 1rem;
+    font-size: 1.8rem;
+}
