@@ -49,11 +49,6 @@ const GameScreen = ({ toggleGameScreen }) => {
       setHighScore(difficulty, score);
     }
 
-    // setInitialGameSettings((prev) => ({
-    //   ...prev,
-    //   cards: shuffleArray(pairedCards),
-    // }));
-
     setGameState((prev) => ({
       ...prev,
       showGameModel: false,
@@ -82,12 +77,13 @@ const GameScreen = ({ toggleGameScreen }) => {
     if (score > currentHighScore) {
       setHighScore(difficulty, score);
     }
+
+    setInitialGameSettings((prev) => ({ ...prev, score: 0 }));
   };
 
   const confirmExit = () => {
     setGameState((prev) => ({
       ...prev,
-      // flippedCardIndexes: [],
       matchedCardIndexes: [],
       showGameModel: true,
       modelTitle: "Exit Game?",
