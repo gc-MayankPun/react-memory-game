@@ -38,7 +38,7 @@ const Card = ({
 
   const handleCardClick = () => {
     // If Game is over then disable clicking
-    if (gameOver) return;
+    // if (gameOver) return;
 
     if (disableClick) return;
 

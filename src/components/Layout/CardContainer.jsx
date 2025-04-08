@@ -66,7 +66,7 @@ const CardContainer = () => {
       settings[initialGameSettings.difficulty].highScore = score;
 
       setTimeout(() => {
-        playSound("Congrats")
+        playSound("Congrats");
         setGameState((prev) => ({
           ...prev,
           showGameModel: true,

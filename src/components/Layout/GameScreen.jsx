@@ -28,7 +28,7 @@ const GameScreen = ({ toggleGameScreen }) => {
 
   useEffect(() => {
     if (moves === 0) {
-      setInitialGameSettings((prev) => ({ ...prev, gameOver: true }));
+      setInitialGameSettings((prev) => ({ ...prev, gameOver: true, score: 0 }));
 
       setTimeout(() => {
         playSound("Defeat");
@@ -44,10 +44,15 @@ const GameScreen = ({ toggleGameScreen }) => {
 
   const handleGameRestart = () => {
     const pairedCards = generatePairedCards(theme, pairCount);
-    setInitialGameSettings((prev) => ({
-      ...prev,
-      cards: shuffleArray(pairedCards),
-    }));
+    // ✅ Check & update high score first
+    if (score > currentHighScore) {
+      setHighScore(difficulty, score);
+    }
+
+    // setInitialGameSettings((prev) => ({
+    //   ...prev,
+    //   cards: shuffleArray(pairedCards),
+    // }));
 
     setGameState((prev) => ({
       ...prev,
@@ -58,6 +63,7 @@ const GameScreen = ({ toggleGameScreen }) => {
 
     setInitialGameSettings((prev) => ({
       ...prev,
+      cards: shuffleArray(pairedCards),
       gameOver: false,
       moves: currentMoves,
       score: 0,
@@ -69,6 +75,7 @@ const GameScreen = ({ toggleGameScreen }) => {
     setGameState((prev) => ({
       ...prev,
       showGameModel: false,
+      flippedCardIndexes: [],
       matchedCardIndexes: [],
     }));
 
@@ -80,12 +87,16 @@ const GameScreen = ({ toggleGameScreen }) => {
   const confirmExit = () => {
     setGameState((prev) => ({
       ...prev,
-      flippedCardIndexes: [],
+      // flippedCardIndexes: [],
       matchedCardIndexes: [],
       showGameModel: true,
       modelTitle: "Exit Game?",
     }));
-    setInitialGameSettings((prev) => ({ ...prev }));
+
+    setInitialGameSettings((prev) => ({
+      ...prev,
+      score: 0,
+    }));
   };
 
   const handleModelClose = () => {
