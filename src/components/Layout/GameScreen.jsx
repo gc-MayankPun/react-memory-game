@@ -88,11 +88,6 @@ const GameScreen = ({ toggleGameScreen }) => {
       showGameModel: true,
       modelTitle: "Exit Game?",
     }));
-
-    setInitialGameSettings((prev) => ({
-      ...prev,
-      score: 0,
-    }));
   };
 
   const handleModelClose = () => {
