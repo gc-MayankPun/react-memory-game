@@ -20,7 +20,7 @@ A simple and engaging React-based memory card game. Choose your theme, set your 
 ## 🔗 Live Demo
 
 Check out the live version of the game here:  
-👉 [Play Now](https://your-demo-link.com)
+👉 [Play Now](https://gc-memory-match-game.netlify.app/)
 
 _(Hosted on [Netlify](https://netlify.com/))_
 
