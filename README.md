@@ -31,6 +31,6 @@ _(Hosted on [Netlify](https://netlify.com/))_
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/react-memory-game.git
+git clone https://github.com/gc-MayankPun/react-memory-game.git
 cd react-memory-game
 ```
