@@ -28,7 +28,7 @@ const GameScreen = ({ toggleGameScreen }) => {
 
   useEffect(() => {
     if (moves === 0) {
-      setInitialGameSettings((prev) => ({ ...prev, gameOver: true, score: 0 }));
+      setInitialGameSettings((prev) => ({ ...prev, gameOver: true }));
 
       setTimeout(() => {
         playSound("Defeat");
@@ -44,10 +44,6 @@ const GameScreen = ({ toggleGameScreen }) => {
 
   const handleGameRestart = () => {
     const pairedCards = generatePairedCards(theme, pairCount);
-    // ✅ Check & update high score first
-    if (score > currentHighScore) {
-      setHighScore(difficulty, score);
-    }
 
     setGameState((prev) => ({
       ...prev,
@@ -74,8 +70,12 @@ const GameScreen = ({ toggleGameScreen }) => {
       matchedCardIndexes: [],
     }));
 
-    if (score > currentHighScore) {
-      setHighScore(difficulty, score);
+    // Only updates highscore if the player won or lost
+    if (gameOver) {
+      // ✅ Check & update high score first
+      if (score > currentHighScore) {
+        setHighScore(difficulty, score);
+      }
     }
 
     setInitialGameSettings((prev) => ({ ...prev, score: 0 }));
