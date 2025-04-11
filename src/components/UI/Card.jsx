@@ -16,7 +16,6 @@ const Card = ({
   setMatchedCardIndexes,
   disableClick,
   setDisableClick,
-  gameOver,
 }) => {
   const cardRef = useRef(null);
 

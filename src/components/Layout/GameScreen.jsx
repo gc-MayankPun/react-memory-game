@@ -21,7 +21,7 @@ const GameScreen = ({ toggleGameScreen }) => {
     setGameState,
   } = useContext(GameContext);
 
-  const { difficulty, moves, score, theme, pairCount } = initialGameSettings;
+  const { difficulty, moves, score, theme, pairCount, gameOver } = initialGameSettings;
   const { currentMoves, currentHighScore } = gameSettingsValue();
 
   const modelRef = useRef(null);
@@ -51,6 +51,14 @@ const GameScreen = ({ toggleGameScreen }) => {
       matchedCardIndexes: [],
       flippedCardIndexes: [],
     }));
+
+    // Only updates highscore if the player won or lost
+    if (gameOver) {
+      // ✅ Check & update high score first
+      if (score > currentHighScore) {
+        setHighScore(difficulty, score);
+      }
+    }
 
     setInitialGameSettings((prev) => ({
       ...prev,
