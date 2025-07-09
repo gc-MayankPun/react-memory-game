@@ -15,33 +15,12 @@ const CardContainer = () => {
     setGameState,
   } = useContext(GameContext);
 
-  const { theme, pairCount, gameOver, score, cards } = initialGameSettings;
+  const { difficulty, theme, pairCount, gameOver, score, cards } = initialGameSettings;
   const { settings } = gameSettingsValue();
 
   let pairedCards;
 
   useEffect(() => {
-    switch (pairCount) {
-      case 6:
-        setGameState((prev) => ({
-          ...prev,
-          cardStyle: { height: "15rem", width: "15rem" },
-        }));
-        break;
-      case 10:
-        setGameState((prev) => ({
-          ...prev,
-          cardStyle: { height: "12rem", width: "12rem" },
-        }));
-        break;
-      case 12:
-        setGameState((prev) => ({
-          ...prev,
-          cardStyle: { height: "10rem", width: "10rem" },
-        }));
-        break;
-    }
-
     pairedCards = generatePairedCards(theme, pairCount);
   }, [theme]);
 
@@ -77,7 +56,7 @@ const CardContainer = () => {
   }, [gameState.matchedCardIndexes]);
 
   return (
-    <ul className="card-container">
+    <ul className={`card-container ${difficulty}`}>
       {cards.map((card, indx) => {
         return (
           <li key={indx}>
@@ -85,7 +64,7 @@ const CardContainer = () => {
               cardStyle={gameState.cardStyle}
               cardIndex={indx}
               cardValue={card}
-              cards={cards}
+              cards={cards} 
               flippedCardIndexes={gameState.flippedCardIndexes}
               setFlippedCardIndexes={(currenltyFlippedCards) =>
                 setGameState((prev) => ({

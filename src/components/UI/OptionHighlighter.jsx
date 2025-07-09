@@ -41,7 +41,7 @@ const OptionHighlighter = ({ label, options, value, setValue }) => {
       <p ref={containerRef} className="highlighter-container">
         {options.map((optionVal, indx) => {
           return (
-            <span key={indx} onClick={handleHighter}>
+            <span className="noselect" key={indx} onClick={handleHighter}>
               {optionVal}
             </span>
           );

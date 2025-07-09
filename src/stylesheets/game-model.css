@@ -21,8 +21,8 @@
 .close{
     color: white;
     position: absolute;
-    top: 3rem;
-    right: 4rem;
+    top: 2rem;
+    right: 2rem;
     font-size: 3rem;
     cursor: pointer;
 }

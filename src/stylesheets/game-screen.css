@@ -1,66 +1,85 @@
 .game-screen {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  height: 100dvh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .game-screen-title {
-    border-bottom: .1rem solid var(--border-color);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  border-bottom: 0.1rem solid var(--border-color);
+  width: 100%;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8rem;
 }
 
 .game-state {
-    display: flex;
-    gap: 2rem
+  display: flex;
+  gap: 2rem;
 }
 
 .game-state span {
-    cursor: pointer;
-    font-size: 2.5rem;
-    transition: .5s ease;
-    display: inline-block;
+  cursor: pointer;
+  font-size: 2.5rem;
+  transition: 0.5s ease;
+  display: inline-block;
 }
 
 .game-state span:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .game-timer {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    font-size: 1.8rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 1.8rem;
 }
 
-.card-container {
-    list-style: none;
-    margin: auto;
-    width: 80rem;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+.card-section {
+  height: calc(100dvh - 8rem);
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.card-container { 
+  display: grid;
+  gap: 2rem;
+  /* width: 100%; */
+  /* max-width: 80rem; */
+  max-width: fit-content;
+  margin: auto;
+  list-style: none;
+}
+
+/* Difficulty-based grid */
+.card-container.Easy {
+  grid-template-columns: repeat(4, 1fr); /* 3 rows x 4 cards */
+}
+
+.card-container.Med {
+  grid-template-columns: repeat(5, 1fr); /* 4 rows x 5 cards */
+}
+
+.card-container.Hard {
+  grid-template-columns: repeat(6, 1fr); /* 4 rows x 6 cards */
 }
 
 /* For Mobiles */
 @media (max-width: 768px) {
-    html {
-        font-size: 45%;
-    }
+  html {
+    font-size: 45%;
+  }
 
-    .card-container {
-        width: 100%;
-    }
+  .card-container {
+    width: 100%;
+  }
+
+  .card-container.Med, .card-container.Hard {
+    grid-template-columns: repeat(4, 1fr); /* 4 rows x 5 cards */
+  }
 }

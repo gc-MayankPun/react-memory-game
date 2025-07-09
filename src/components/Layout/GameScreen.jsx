@@ -136,7 +136,7 @@ const GameScreen = ({ toggleGameScreen }) => {
             <p>Score: {score}</p>
           </section>
         </section>
-        <section>
+        <section className="card-section">
           <CardContainer />
         </section>
       </div>

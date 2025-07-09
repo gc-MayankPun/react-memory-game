@@ -29,7 +29,7 @@ const HomeScreen = ({ toggleGameScreen }) => {
   };
 
   return (
-    <div className="home-screen">
+    <div className="home-screen noselect">
       <section className="game-title">
         <section>
           <h1>

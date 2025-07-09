@@ -26,7 +26,12 @@ export const GameProvider = ({ children }) => {
         delay: 1200,
         highScore: getHighScore("Easy"),
       },
-      Med: { pairs: 10, moves: 26, delay: 800, highScore: getHighScore("Med") },
+      Med: {
+        pairs: 10,
+        moves: 26,
+        delay: 800,
+        highScore: getHighScore("Med"),
+      },
       Hard: {
         pairs: 12,
         moves: 28,

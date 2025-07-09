@@ -71,6 +71,12 @@ button:hover {
   will-change: opacity;
 }
 
+/* Globally or to clickable items */
+.noselect {
+  user-select: none;
+  -webkit-user-select: none; /* for Safari/Android */
+}
+
 /* For Tablets */
 @media (max-width: 998px) {
   html {
