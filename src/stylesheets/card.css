@@ -1,7 +1,5 @@
 .card {
   width: 100%;
-  max-width: 10rem;
-  max-height: 10rem;
   aspect-ratio: 1 / 1; /* Always a square */
   border-radius: 1rem;
   cursor: pointer;

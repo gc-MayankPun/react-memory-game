@@ -1,17 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import "../../stylesheets/home-screen.css";
 
-import { GameContext } from "../../context/gameContext";
-import OptionHighlighter from "../UI/OptionHighlighter";
-import { getHighScore } from "../../utils/localStorage.utils";
+import { GameContext } from "../../context/gameContext"; // Global state
+import OptionHighlighter from "../UI/OptionHighlighter"; // Custom select UI
+import { getHighScore } from "../../utils/localStorage.utils"; // High score utility
 
+// HomeScreen: Initial landing page for the game
 const HomeScreen = ({ toggleGameScreen }) => {
+  // Access global game context values and setters
   const { initialGameSettings, setInitialGameSettings, gameSettingsValue } =
     useContext(GameContext);
 
+  // Destructure difficulty and theme from the current game settings
   const { difficulty, theme } = initialGameSettings;
+
+  // Get current settings (pair count and allowed moves) based on difficulty
   const { currentPairs, currentMoves } = gameSettingsValue();
 
+  // Whenever the difficulty changes, update pair count and moves accordingly
   useEffect(() => {
     setInitialGameSettings((prev) => ({
       ...prev,
@@ -20,9 +26,11 @@ const HomeScreen = ({ toggleGameScreen }) => {
     }));
   }, [difficulty]);
 
+  // Returns the high score for the current difficulty from localStorage
   const handleHighScore = () => {
     const highScore = getHighScore(difficulty);
 
+    // If high score is perfect (all pairs matched), show emoji
     if (highScore === currentPairs) return `${highScore} 🫡`;
 
     return highScore;
@@ -30,6 +38,7 @@ const HomeScreen = ({ toggleGameScreen }) => {
 
   return (
     <div className="home-screen noselect">
+      {/* Game title section */}
       <section className="game-title">
         <section>
           <h1>
@@ -44,9 +53,13 @@ const HomeScreen = ({ toggleGameScreen }) => {
           />
         </div>
       </section>
+
+      {/* Button to start the game */}
       <section>
         <button onClick={toggleGameScreen}>Play the Game</button>
       </section>
+
+      {/* Option selectors for difficulty and theme */}
       <section>
         <div>
           <OptionHighlighter
@@ -58,6 +71,7 @@ const HomeScreen = ({ toggleGameScreen }) => {
             }}
           />
         </div>
+
         <div className="option-highlighter-gap">
           <OptionHighlighter
             label={"Theme"}
@@ -69,12 +83,16 @@ const HomeScreen = ({ toggleGameScreen }) => {
           />
         </div>
       </section>
+
+      {/* Game instructions */}
       <section className="instructions">
         <ul>
           <li>Match all pairs to win!</li>
           <li>Try to finish in the least moves!</li>
         </ul>
       </section>
+
+      {/* Display high score */}
       <p className="high-score">🏆 High Score: {handleHighScore()}</p>
     </div>
   );
