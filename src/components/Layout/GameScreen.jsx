@@ -48,7 +48,7 @@ const GameScreen = ({ toggleGameScreen }) => {
           showGameModel: true,
           modelTitle: "Game Over",
         }));
-      }, 1000);
+      }, 500);
     }
   }, [moves]);
 

@@ -1,11 +1,9 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Card from "../UI/Card";
 import { GameContext } from "../../context/gameContext";
-
-import { shuffleArray } from "../../utils/shuffleArray.utils";
-import { generatePairedCards } from "../../utils/generatePairedCards.utils";
 import { playSound } from "../../utils/playSound.utils";
 import { saveHighScore } from "../../utils/saveHighScore";
+import { useCards } from "../../hooks/useCards";
 
 const CardContainer = () => {
   // Destructure the context values from GameContext
@@ -18,24 +16,25 @@ const CardContainer = () => {
   } = useContext(GameContext);
 
   // Destructure values from initialGameSettings
-  const { difficulty, theme, pairCount, gameOver, score, cards } =
-    initialGameSettings;
+  const { difficulty, gameOver, score } = initialGameSettings;
   const { currentHighScore } = gameSettingsValue();
 
-  // Variable to hold generated paired cards
-  const pairedCards = useMemo(
-    // Generate new pairs of cards when the theme changes
-    () => generatePairedCards(theme, pairCount),
-    [theme, pairCount]
+  // Generate & shuffle cards
+  const cards = useCards(
+    initialGameSettings.theme,
+    initialGameSettings.pairCount,
+    gameState.showGameModel
   );
 
-  // Shuffle and assign cards whenever the game model (modal) is closed or reopened
+  // ← This ref ensures the win logic only fires once
+  const winHandled = useRef(false);
+
+  // Reset the “handled” flag whenever we flip gameOver back to false
   useEffect(() => {
-    setInitialGameSettings((prev) => ({
-      ...prev,
-      cards: shuffleArray(pairedCards),
-    }));
-  }, [gameState.showGameModel, pairedCards]);
+    if (!gameOver) {
+      winHandled.current = false;
+    }
+  }, [gameOver]);
 
   // Check if the game is completed (all cards matched)
   useEffect(() => {
@@ -43,13 +42,17 @@ const CardContainer = () => {
       cards.length > 0 &&
       cards.length === gameState.matchedCardIndexes.length
     ) {
+      // If not all matched or we've already handled the win, skip
+      if (winHandled.current) return;
+
       // Mark game as over
+      winHandled.current = true; // mark as handled
       setInitialGameSettings((prev) => ({
         ...prev,
         gameOver: true,
       }));
 
-      // Update high score for the current difficulty
+      // Save high score if beaten
       saveHighScore(difficulty, score, currentHighScore);
 
       // Play a sound and open game modal with "Game Completed"
@@ -61,9 +64,17 @@ const CardContainer = () => {
           showGameModel: true,
           modelTitle: "Game Completed",
         }));
-      }, 1000);
+      }, 500);
     }
-  }, [gameState.matchedCardIndexes]);
+  }, [
+    cards,
+    gameState.matchedCardIndexes,
+    difficulty,
+    score,
+    currentHighScore,
+    setInitialGameSettings,
+    setGameState,
+  ]);
 
   return (
     // Assign difficulty-based class to control grid layout
