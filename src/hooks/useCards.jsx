@@ -1,19 +1,12 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo } from "react";
 import { generatePairedCards } from "../utils/generatePairedCards.utils";
 import { shuffleArray } from "../utils/shuffleArray.utils";
 
-export function useCards(theme, pairCount, resetTrigger) {
-  // Pair generation
-  const paired = useMemo(
-    () => generatePairedCards(theme, pairCount),
-    [theme, pairCount]
-  );
-
-  // Shuffled cards
-  const [cards, setCards] = useState([]);
-  useEffect(() => {
-    setCards(shuffleArray(paired));
-  }, [paired, resetTrigger]);
+export function useCards(theme, pairCount) {
+  const cards = useMemo(() => {
+    const pairs = generatePairedCards(theme, pairCount);
+    return shuffleArray(pairs);
+  }, [theme, pairCount]); // ✅ Only shuffle on game config change
 
   return cards;
 }

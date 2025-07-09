@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useRef } from "react";
 import "../../stylesheets/game-screen.css";
-import { RxExit } from "react-icons/rx";
 
 import { GameContext } from "../../context/gameContext"; // Global game state
 import GameModel from "./GameModel"; // Modal component
@@ -11,6 +10,7 @@ import { generatePairedCards } from "../../utils/generatePairedCards.utils";
 import { shuffleArray } from "../../utils/shuffleArray.utils";
 import { playSound } from "../../utils/playSound.utils";
 import { saveHighScore } from "../../utils/saveHighScore";
+import GameScreenTitle from "../UI/GameScreenTitle";
 
 // GameScreen: Main game logic and UI layout
 const GameScreen = ({ toggleGameScreen }) => {
@@ -31,6 +31,16 @@ const GameScreen = ({ toggleGameScreen }) => {
   // Ref for animating modal with GSAP
   const modelRef = useRef(null);
 
+  useEffect(() => {
+    if (gameState.showGameModel) return; // prevent mid-game theme switch
+
+    const pairedCards = generatePairedCards(theme, pairCount);
+    setInitialGameSettings((prev) => ({
+      ...prev,
+      cards: shuffleArray(pairedCards),
+    }));
+  }, [theme, pairCount]);
+
   // Game Over: if moves reach 0, end game and show modal
   useEffect(() => {
     if (moves === 0) {
@@ -48,13 +58,20 @@ const GameScreen = ({ toggleGameScreen }) => {
           showGameModel: true,
           modelTitle: "Game Over",
         }));
-      }, 500);
+      }, 200);
     }
   }, [moves]);
 
   // Function to update highscore if applicable
   const persistHighScore = useCallback(() => {
-    if (gameOver) saveHighScore(difficulty, score, currentHighScore);
+    if (gameOver)
+      saveHighScore(
+        difficulty,
+        score,
+        currentHighScore,
+        initialGameSettings.moves,
+        initialGameSettings.pairCount
+      );
   }, [gameOver, difficulty, score, currentHighScore]);
 
   // Restart game logic
@@ -105,7 +122,6 @@ const GameScreen = ({ toggleGameScreen }) => {
   const confirmExit = () => {
     setGameState((prev) => ({
       ...prev,
-      matchedCardIndexes: [],
       showGameModel: true,
       modelTitle: "Exit Game?",
     }));
@@ -143,22 +159,21 @@ const GameScreen = ({ toggleGameScreen }) => {
         style={{ filter: gameState.showGameModel ? `blur(4px)` : `blur(0)` }}
       >
         {/* Top header with exit and score details */}
-        <section className="game-screen-title">
-          <section className="game-state">
-            {/* Exit button triggers confirmation modal */}
-            <span onClick={confirmExit}>
-              <RxExit />
-            </span>
-          </section>
-          <section className="game-timer">
-            <p>Moves Left: {moves}</p>
-            <p>Score: {score}</p>
-          </section>
-        </section>
+        <GameScreenTitle
+          confirmExit={confirmExit}
+          moves={moves}
+          score={score}
+        />
 
         {/* Game cards grid */}
         <section className="card-section">
-          <CardContainer />
+          <CardContainer
+            initialGameSettings={initialGameSettings}
+            setInitialGameSettings={setInitialGameSettings}
+            gameSettingsValue={gameSettingsValue}
+            gameState={gameState}
+            setGameState={setGameState}
+          />
         </section>
       </div>
     </>

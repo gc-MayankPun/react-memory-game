@@ -48,12 +48,9 @@
 
 .card-container { 
   display: grid;
-  gap: 2rem;
-  /* width: 100%; */
-  /* max-width: 80rem; */
+  gap: 2rem; 
   max-width: fit-content;
-  margin: auto;
-  list-style: none;
+  margin: auto; 
 }
 
 /* Difficulty-based grid */

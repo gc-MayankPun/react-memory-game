@@ -27,13 +27,20 @@ const HomeScreen = ({ toggleGameScreen }) => {
   }, [difficulty]);
 
   // Returns the high score for the current difficulty from localStorage
+  // const handleHighScore = () => {
+  //   const highScore = getHighScore(difficulty);
+
+  //   // If high score is perfect (all pairs matched), show emoji
+  //   if (highScore === currentPairs) return `🏆 High Score: ${highScore} 🫡`;
+
+  //   return highScore;
+  // };
+
   const handleHighScore = () => {
     const highScore = getHighScore(difficulty);
+    const egg = localStorage.getItem(`easter_egg_${difficulty}`);
 
-    // If high score is perfect (all pairs matched), show emoji
-    if (highScore === currentPairs) return `${highScore} 🫡`;
-
-    return highScore;
+    return highScore ? `🏆 High Score: ${highScore} ${egg || ""}` : "N/A";
   };
 
   return (
@@ -93,7 +100,7 @@ const HomeScreen = ({ toggleGameScreen }) => {
       </section>
 
       {/* Display high score */}
-      <p className="high-score">🏆 High Score: {handleHighScore()}</p>
+      <p className="high-score">Game completed with {handleHighScore()}</p>
     </div>
   );
 };

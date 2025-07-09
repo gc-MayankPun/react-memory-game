@@ -1,4 +1,4 @@
-import baseEmojis from "../api/foods.json";
+import baseEmojis from "../api/emojis.json";
 import baseFoods from "../api/foods.json";
 import baseSpace from "../api/space.json";
 
